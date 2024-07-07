@@ -151,7 +151,7 @@ function drawWire(e) {
         connectedCells.add(newCell); // Добавляем клетку в Set, если она соединилась
 
         // Проверяем, соединилось ли уже три клетки
-        if (connectedCells.size >= 3 && !isImageChanged) {
+        if (connectedCells.size >= 9 && !isImageChanged) {
           imageElement.src = './images/bonch-level1.png'; // Меняем изображение
           isImageChanged = true; // Устанавливаем флаг, чтобы изображение не менялось снова
           nextLevelButton.style.display = 'block'; // Показываем кнопку "Следующий уровень"
