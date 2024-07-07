@@ -3,8 +3,6 @@ const ctx = canvas.getContext('2d');
 const cellSize = 80;
 const gridSize = 10;
 
-
-
 // Массив с цветными клетками
 const colorCells = [
   { index: 4, color: '#68d3e1' },
@@ -35,9 +33,13 @@ let isDrawing = false;
 let currentCell = null;
 let currentWireColor = null;
 let isWireConnected = false;
+let connectedCells = new Set(); // Используем Set для отслеживания соединенных клеток
+let isImageChanged = false; // Добавляем переменную для отслеживания изменения изображения
 
 const sign = document.getElementById("sign");
 const restartButton = document.getElementById("restartButton");
+const imageElement = document.getElementById('myImage'); // Получаем ссылку на элемент изображения
+const nextLevelButton = document.getElementById('nextLevelButton'); // Получаем ссылку на кнопку "Следующий уровень"
 
 restartButton.addEventListener('click', restartGame);
 
@@ -146,6 +148,14 @@ function drawWire(e) {
       // Проверяем подключение к цветным клеткам
       if (colorCells.some(cell => cell.index === newCell)) {
         isWireConnected = true;
+        connectedCells.add(newCell); // Добавляем клетку в Set, если она соединилась
+
+        // Проверяем, соединилось ли уже три клетки
+        if (connectedCells.size >= 3 && !isImageChanged) {
+          imageElement.src = './images/bonch-level2.png'; // Меняем изображение
+          isImageChanged = true; // Устанавливаем флаг, чтобы изображение не менялось снова
+          nextLevelButton.style.display = 'block'; // Показываем кнопку "Следующий уровень"
+        }
         isDrawing = false; // Прекращаем рисование
       }
     }
@@ -154,6 +164,7 @@ function drawWire(e) {
 
 function stopDrawing() {
   isDrawing = false;
+  isImageChanged = false; // Сбрасываем флаг после окончания рисования
 
   if (isWireConnected) {
     if (isConnected()) {
@@ -202,6 +213,11 @@ function restartGame() {
   currentCell = null;
   currentWireColor = null;
   isWireConnected = false;
+  connectedCells = new Set(); // Очищаем Set при перезапуске
+  isImageChanged = false; // Сбрасываем флаг imageChanged при перезапуске игры
+
+  imageElement.src = './images/bonch-blur1.jpg'; // Возвращаем исходное изображение
+  nextLevelButton.style.display = 'none'; // Скрываем кнопку "Следующий уровень"
 
   lines = [];
 
@@ -308,6 +324,7 @@ function drawWireTouch(e) {
 
 function stopDrawingTouch() {
   isDrawing = false;
+  isImageChanged = false; // Сбрасываем флаг alert после окончания рисования
   if (isWireConnected) {
     const connected = isConnected();
     if (connected) {
