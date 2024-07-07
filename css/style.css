@@ -1,0 +1,83 @@
+body {
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+
+  #myCanvas {
+    background-color: #f0f0f0;
+    border: 1px solid black;
+  }
+
+
+  body {
+    margin: 0; /* Убираем отступы по умолчанию у body */
+    overflow: hidden; /* Убираем полосы прокрутки, чтобы контент не "прыгал" */
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем контент по вертикали */
+    align-items: center; /* Центрируем контент по горизонтали */
+    min-height: 100vh; 
+    width: 100vw; /* Занимаем всю ширину экрана */
+  }
+  
+  #myCanvas {
+    position: absolute;
+    width: 100%; 
+    height: auto;
+    max-width: 800px; /* Ограничиваем максимальную ширину канваса */
+    max-height: 800px; /* Ограничиваем максимальную высоту канваса */
+  }
+
+  .btns{
+    margin-top: 1150px;
+    text-align: center;
+  }
+
+.button {
+  margin-bottom: 50px;
+
+    cursor: pointer;
+  padding: 16px 42px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.5);
+  line-height: 1.25;
+  background: #FC6E51;
+  text-decoration: none;
+  user-select: none;
+  color: white;
+  font-size: 52px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  position: relative;
+  transition: background-color .6s ease;
+  overflow: hidden;
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  top: var(--mouse-y);
+  left: var(--mouse-x);
+  transform-style: flat;
+  transform: translate3d(-50%, -50%, 0);
+  background: rgba(white, .1);
+  border-radius: 100%;
+  transition: width .3s ease, height .3s ease;
+}
+
+.button:focus,
+.button:hover {
+  background: darken(#FC6E51, 7%);
+}
+
+.button:active:after {
+  width: 300px;
+  height: 300px;
+}

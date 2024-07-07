@@ -1,0 +1,48 @@
+lvl 2 
+// const colorCells = [
+//   { index: 4, color: '#68d3e1' },
+//   { index: 5, color: '#f3a273' },
+//   { index: 21, color: '#fefc8e' },
+//   { index: 22, color: '#e76fa9' },
+//   { index: 25, color: '#e76fa9' },
+//   { index: 26, color: '#92c5f5' },
+//   { index: 35, color: '#d0f187' },
+//   { index: 36, color: '#ba99fc' },
+//   { index: 41, color: '#d0f187' },
+//   { index: 47, color: '#92c5f5' },
+//   { index: 54, color: '#75df98' },
+//   { index: 72, color: '#75df98' },
+//   { index: 73, color: '#fefc8e' },
+//   { index: 77, color: '#eb6e7b' },
+//   { index: 78, color: '#ba99fc' },
+//   { index: 86, color: '#68d3e1' },
+//   { index: 88, color: '#f3a273' },
+//   { index: 99, color: '#eb6e7b' },
+// ];
+lvl 3
+
+// Массив с цветными клетками
+const colorCells = [
+  { index: 12, color: '#f4adaf' },
+  { index: 18, color: '#d0f187' },
+  { index: 19, color: '#eb6e7b' },
+  { index: 33, color: '#92c5f5' },
+  { index: 35, color: '#e76fa9' },
+  { index: 41, color: '#f4adaf' },
+  { index: 46, color: '#9fd181' },
+  { index: 57, color: '#9fd181' },
+  { index: 62, color: '#ba99fc' },
+  { index: 65, color: '#75df98' },
+  { index: 67, color: '#e76fa9' },
+  { index: 74, color: '#ba99fc' },
+  { index: 75, color: '#f3a273' },
+  { index: 76, color: '#d0f187' },
+  { index: 77, color: '#92c5f5' },
+  { index: 81, color: '#f3a273' },
+  { index: 84, color: '#75df98' },
+  { index: 86, color: '#fefc8e' },
+  { index: 89, color: '#fefc8e' },
+  { index: 90, color: '#eb6e7b' },
+  { index: 97, color: '#68d3e1' },
+  { index: 99, color: '#68d3e1' },
+];
