@@ -5,25 +5,46 @@ const gridSize = 10;
 
 // Массив с цветными клетками
 const colorCells = [
-  { index: 0, color: '#92c5f5' },
-  { index: 21, color: '#e76fa9' },
-  { index: 24, color: '#e76fa9' },
-  { index: 36, color: '#d0f187' },
-  { index: 39, color: '#92c5f5' },
-  { index: 40, color: '#ba99fc' },
-  { index: 41, color: '#75df98' },
-  { index: 42, color: '#d0f187' },
-  { index: 49, color: '#ED3CCA' },
-  { index: 50, color: '#f3a273' },
-  { index: 51, color: '#fefc8e' },
-  { index: 61, color: '#75df98' },
-  { index: 66, color: '#fefc8e' },
-  { index: 68, color: '#ba99fc' },
-  { index: 74, color: '#f3a273' },
-  { index: 80, color: '#eb6e7b' },
-  { index: 81, color: '#ED3CCA' },
-  { index: 89, color: '#eb6e7b' },
+  { index: 0, color: '#ff0000' },
+  { index: 21, color: '#ffa500' },
+  { index: 24, color: '#ffa500' },
+  { index: 36, color: ' #ffff00' },
+  { index: 39, color: '#ff0000' },
+  { index: 40, color: '#008000' },
+  { index: 41, color: '#0000ff' },
+  { index: 42, color: ' #ffff00' },
+  { index: 49, color: '#4B0082' },
+  { index: 50, color: '#ee82ee' },
+  { index: 51, color: '#00ff00' },
+  { index: 61, color: '#0000ff' },
+  { index: 66, color: '#00ff00' },
+  { index: 68, color: '#008000' },
+  { index: 74, color: '#ee82ee' },
+  { index: 80, color: '#42aaff' },
+  { index: 81, color: '#4B0082' },
+  { index: 89, color: '#42aaff' },
 ];
+
+// const colorCells = [
+//   { index: 0, color: '#92c5f5' },
+//   { index: 21, color: '#e76fa9' },
+//   { index: 24, color: '#e76fa9' },
+//   { index: 36, color: '#d0f187' },
+//   { index: 39, color: '#92c5f5' },
+//   { index: 40, color: '#ba99fc' },
+//   { index: 41, color: '#75df98' },
+//   { index: 42, color: '#d0f187' },
+//   { index: 49, color: '#ED3CCA' },
+//   { index: 50, color: '#f3a273' },
+//   { index: 51, color: '#fefc8e' },
+//   { index: 61, color: '#75df98' },
+//   { index: 66, color: '#fefc8e' },
+//   { index: 68, color: '#ba99fc' },
+//   { index: 74, color: '#f3a273' },
+//   { index: 80, color: '#eb6e7b' },
+//   { index: 81, color: '#ED3CCA' },
+//   { index: 89, color: '#eb6e7b' },
+// ];
 
 // Рисуем сетку и клетки
 drawGrid();
@@ -155,6 +176,7 @@ function drawWire(e) {
           imageElement.src = './images/bonch-level1.png'; // Меняем изображение
           isImageChanged = true; // Устанавливаем флаг, чтобы изображение не менялось снова
           nextLevelButton.style.display = 'block'; // Показываем кнопку "Следующий уровень"
+          myCanvas.style.opacity = '0'
         }
         isDrawing = false; // Прекращаем рисование
       }
@@ -218,6 +240,7 @@ function restartGame() {
 
   imageElement.src = './images/bonch-blur.jpg'; // Возвращаем исходное изображение
   nextLevelButton.style.display = 'none'; // Скрываем кнопку "Следующий уровень"
+  myCanvas.style.opacity = '1'
 
   lines = [];
 

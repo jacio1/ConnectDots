@@ -5,24 +5,24 @@ const gridSize = 10;
 
 // Массив с цветными клетками
 const colorCells = [
-  { index: 4, color: '#68d3e1' },
-  { index: 5, color: '#f3a273' },
-  { index: 21, color: '#fefc8e' },
-  { index: 22, color: '#e76fa9' },
-  { index: 25, color: '#e76fa9' },
-  { index: 26, color: '#92c5f5' },
-  { index: 35, color: '#d0f187' },
-  { index: 36, color: '#ba99fc' },
-  { index: 41, color: '#d0f187' },
-  { index: 47, color: '#92c5f5' },
-  { index: 54, color: '#75df98' },
-  { index: 72, color: '#75df98' },
-  { index: 73, color: '#fefc8e' },
-  { index: 77, color: '#eb6e7b' },
-  { index: 78, color: '#ba99fc' },
-  { index: 86, color: '#68d3e1' },
-  { index: 88, color: '#f3a273' },
-  { index: 99, color: '#eb6e7b' },
+  { index: 4, color: '#ff0000' },
+  { index: 5, color: '#ffa500' },
+  { index: 21, color: '#ffff00' },
+  { index: 22, color: '#008000' },
+  { index: 25, color: '#008000' },
+  { index: 26, color: '#0000ff' },
+  { index: 35, color: '#4B0082' },
+  { index: 36, color: '#ee82ee' },
+  { index: 41, color: '#4B0082' },
+  { index: 47, color: '#0000ff' },
+  { index: 54, color: '#00ff00' },
+  { index: 72, color: '#00ff00' },
+  { index: 73, color: '#ffff00' },
+  { index: 77, color: '#42aaff' },
+  { index: 78, color: '#ee82ee' },
+  { index: 86, color: '#ff0000' },
+  { index: 88, color: '#ffa500' },
+  { index: 99, color: '#42aaff' },
 ];
 
 // Рисуем сетку и клетки
@@ -155,6 +155,8 @@ function drawWire(e) {
           imageElement.src = './images/bonch-level2.png'; // Меняем изображение
           isImageChanged = true; // Устанавливаем флаг, чтобы изображение не менялось снова
           nextLevelButton.style.display = 'block'; // Показываем кнопку "Следующий уровень"
+          myCanvas.style.opacity = '0'
+
         }
         isDrawing = false; // Прекращаем рисование
       }
@@ -216,9 +218,9 @@ function restartGame() {
   connectedCells = new Set(); // Очищаем Set при перезапуске
   isImageChanged = false; // Сбрасываем флаг imageChanged при перезапуске игры
 
-  imageElement.src = './images/bonch-blur1.jpg'; // Возвращаем исходное изображение
+  imageElement.src = './images/bonch-blur1.png'; // Возвращаем исходное изображение
   nextLevelButton.style.display = 'none'; // Скрываем кнопку "Следующий уровень"
-
+  myCanvas.style.opacity = '1'
   lines = [];
 
   drawGrid();

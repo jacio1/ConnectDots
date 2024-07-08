@@ -223,6 +223,7 @@ function restartGame() {
 
   imageElement.src = './images/bonch-blur2.png'; // Возвращаем исходное изображение
   nextLevelButton.style.display = 'none'; // Скрываем кнопку "Следующий уровень"
+  myCanvas.style.opacity = '1'
 
   lines = [];
 
