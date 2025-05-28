@@ -3,7 +3,6 @@ const ctx = canvas.getContext('2d');
 const cellSize = 80;
 const gridSize = 10;
 
-// Массив с цветными клетками
 const colorCells = [
   { index: 12, color: '#f4adaf' },
   { index: 18, color: '#d0f187' },
@@ -29,7 +28,6 @@ const colorCells = [
   { index: 99, color: '#68d3e1' },
 ];
 
-// Рисуем сетку и клетки
 drawGrid();
 drawCells(colorCells);
 
@@ -37,30 +35,26 @@ let isDrawing = false;
 let currentCell = null;
 let currentWireColor = null;
 let isWireConnected = false;
-let connectedCells = new Set(); // Используем Set для отслеживания соединенных клеток
-let isImageChanged = false; // Добавляем переменную для отслеживания изменения изображения
+let connectedCells = new Set(); 
+let isImageChanged = false;
 
 const sign = document.getElementById("sign");
 const restartButton = document.getElementById("restartButton");
-const imageElement = document.getElementById('myImage'); // Получаем ссылку на элемент изображения
-const nextLevelButton = document.getElementById('nextLevelButton'); // Получаем ссылку на кнопку "Следующий уровень"
+const imageElement = document.getElementById('myImage');
+const nextLevelButton = document.getElementById('nextLevelButton'); 
 
 restartButton.addEventListener('click', restartGame);
 
-// Массив для хранения линий
 let lines = [];
 
-// Обработчики событий для мыши
 canvas.addEventListener('mousedown', startDrawing);
 canvas.addEventListener('mousemove', drawWire);
 canvas.addEventListener('mouseup', stopDrawing);
 
-// Обработчики событий для касания
 canvas.addEventListener('touchstart', startDrawingTouch);
 canvas.addEventListener('touchmove', drawWireTouch);
 canvas.addEventListener('touchend', stopDrawingTouch);
 
-// Функция для получения позиции канваса
 function getCanvasPosition() {
   const rect = canvas.getBoundingClientRect();
   return {
@@ -86,7 +80,6 @@ function drawGrid() {
   }
 }
 
-// Рисуем клетки из массива
 function drawCells(cells) {
   cells.forEach(cell => {
     drawCell(cell.index, cell.color);
@@ -124,10 +117,9 @@ function drawWire(e) {
     (newCell === currentCell - gridSize)
   ) {
     if (newCellColor === currentWireColor || newCellColor === null) {
-      // Проверка пересечения *перед* рисованием
       if (checkWireIntersection(currentCell, newCell)) {
         restartGame();
-        return; // Прерываем рисование, если есть пересечение
+        return; 
       }
 
       const x1 = (currentCell % gridSize) * cellSize + cellSize / 2;
@@ -135,10 +127,8 @@ function drawWire(e) {
       const x2 = (newCell % gridSize) * cellSize + cellSize / 2;
       const y2 = (Math.floor(newCell / gridSize)) * cellSize + cellSize / 2;
 
-      // Добавляем линию в массив
       lines.push({ start: currentCell, end: newCell, color: currentWireColor });
 
-      // Рисуем линию
       ctx.beginPath();
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
@@ -149,19 +139,17 @@ function drawWire(e) {
 
       currentCell = newCell;
 
-      // Проверяем подключение к цветным клеткам
       if (colorCells.some(cell => cell.index === newCell)) {
         isWireConnected = true;
-        connectedCells.add(newCell); // Добавляем клетку в Set, если она соединилась
+        connectedCells.add(newCell);
 
-        // Проверяем, соединилось ли уже три клетки
         if (connectedCells.size >= 9 && !isImageChanged) {
-          imageElement.src = './images/bonch-level3.png'; // Меняем изображение
-          isImageChanged = true; // Устанавливаем флаг, чтобы изображение не менялось снова
-          nextLevelButton.style.display = 'block'; // Показываем кнопку "Следующий уровень"
+          imageElement.src = './images/bonch-level3.png';
+          isImageChanged = true; 
+          nextLevelButton.style.display = 'block'; 
           myCanvas.style.opacity = '0'
         }
-        isDrawing = false; // Прекращаем рисование
+        isDrawing = false;
       }
     }
   }
@@ -169,14 +157,13 @@ function drawWire(e) {
 
 function stopDrawing() {
   isDrawing = false;
-  isImageChanged = false; // Сбрасываем флаг после окончания рисования
+  isImageChanged = false;
 
   if (isWireConnected) {
     if (isConnected()) {
-      // Выводим alert, если все линии соединены
+
       alert("Все линии соединены!");
 
-      // Показываем кнопку "Следующий уровень"
       document.getElementById('nextLevelButton').style.display = 'block';
     }
   }
@@ -218,11 +205,11 @@ function restartGame() {
   currentCell = null;
   currentWireColor = null;
   isWireConnected = false;
-  connectedCells = new Set(); // Очищаем Set при перезапуске
-  isImageChanged = false; // Сбрасываем флаг imageChanged при перезапуске игры
+  connectedCells = new Set(); 
+  isImageChanged = false; 
 
-  imageElement.src = './images/bonch-blur2.png'; // Возвращаем исходное изображение
-  nextLevelButton.style.display = 'none'; // Скрываем кнопку "Следующий уровень"
+  imageElement.src = './images/bonch-blur2.png'; 
+  nextLevelButton.style.display = 'none'; 
   myCanvas.style.opacity = '1'
 
   lines = [];
@@ -231,44 +218,37 @@ function restartGame() {
   drawCells(colorCells);
 }
 
-// Функция проверки пересечения линий
 function checkWireIntersection(startCell, endCell) {
-  // Проверка пересечения с линиями сетки
   if (startCell % gridSize === endCell % gridSize) {
-    // Линии вертикальны
     for (let i = 0; i <= gridSize; i++) {
       if (i * cellSize === (startCell % gridSize) * cellSize) {
-        continue; // Пропускаем линию сетки, через которую проходит линия
+        continue;
       }
-      // Проверка пересечения
       if (linesIntersect(
         (startCell % gridSize) * cellSize, 0,
         (startCell % gridSize) * cellSize, gridSize * cellSize,
-        (startCell % gridSize) * cellSize, (Math.floor(startCell / gridSize)) * cellSize + cellSize / 2, // Смещаем точку на половину размера клетки вверх
-        (startCell % gridSize) * cellSize, (Math.floor(endCell / gridSize)) * cellSize + cellSize / 2 // Смещаем точку на половину размера клетки вверх
+        (startCell % gridSize) * cellSize, (Math.floor(startCell / gridSize)) * cellSize + cellSize / 2, 
+        (startCell % gridSize) * cellSize, (Math.floor(endCell / gridSize)) * cellSize + cellSize / 2 
       )) {
         return true;
       }
     }
   } else if (Math.floor(startCell / gridSize) === Math.floor(endCell / gridSize)) {
-    // Линии горизонтальны
     for (let i = 0; i <= gridSize; i++) {
       if (i * cellSize === (Math.floor(startCell / gridSize)) * cellSize) {
-        continue; // Пропускаем линию сетки, через которую проходит линия
+        continue; 
       }
-      // Проверка пересечения
       if (linesIntersect(
         0, (Math.floor(startCell / gridSize)) * cellSize,
         gridSize * cellSize, (Math.floor(startCell / gridSize)) * cellSize,
-        (startCell % gridSize) * cellSize + cellSize / 2, (Math.floor(startCell / gridSize)) * cellSize, // Смещаем точку на половину размера клетки влево
-        (endCell % gridSize) * cellSize + cellSize / 2, (Math.floor(startCell / gridSize)) * cellSize // Смещаем точку на половину размера клетки влево
+        (startCell % gridSize) * cellSize + cellSize / 2, (Math.floor(startCell / gridSize)) * cellSize, 
+        (endCell % gridSize) * cellSize + cellSize / 2, (Math.floor(startCell / gridSize)) * cellSize 
       )) {
         return true;
       }
     }
   }
 
-  // Проверка пересечения с другими линиями (исключая последнюю)
   for (let i = 0; i < lines.length - 1; i++) {
     if (
       (startCell === lines[i].start && endCell === lines[i].end) ||
@@ -285,7 +265,6 @@ function checkWireIntersection(startCell, endCell) {
   return false;
 }
 
-// Проверка пересечения отрезков
 function linesIntersect(x1, y1, x2, y2, x3, y3, x4, y4) {
   const denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 
@@ -302,11 +281,10 @@ function linesIntersect(x1, y1, x2, y2, x3, y3, x4, y4) {
   return ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1;
 }
 
-// Обработчики событий для касаний
 function startDrawingTouch(e) {
   const touch = e.touches[0];
-  const canvasPos = getCanvasPosition(); // Получаем позицию канваса
-  const x = touch.clientX - canvasPos.left; // Вычисляем координаты касания относительно канваса
+  const canvasPos = getCanvasPosition();
+  const x = touch.clientX - canvasPos.left;
   const y = touch.clientY - canvasPos.top;
   const cellIndex = getCellIndex(x, y); 
   const cellColor = getColorForCell(cellIndex);
@@ -322,15 +300,15 @@ function drawWireTouch(e) {
   if (!isDrawing) return;
   e.preventDefault();
   const touch = e.touches[0];
-  const canvasPos = getCanvasPosition(); // Получаем позицию канваса
-  const x = touch.clientX - canvasPos.left; // Вычисляем координаты касания относительно канваса
+  const canvasPos = getCanvasPosition(); 
+  const x = touch.clientX - canvasPos.left; 
   const y = touch.clientY - canvasPos.top;
   drawWire({ offsetX: x, offsetY: y });
 }
 
 function stopDrawingTouch() {
   isDrawing = false;
-  isImageChanged = false; // Сбрасываем флаг alert после окончания рисования
+  isImageChanged = false; 
   if (isWireConnected) {
     const connected = isConnected();
     if (connected) {
