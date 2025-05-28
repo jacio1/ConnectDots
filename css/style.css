@@ -10,25 +10,25 @@ body {
 
 
   body {
-    margin: 0; /* Убираем отступы по умолчанию у body */
-    overflow: hidden; /* Убираем полосы прокрутки, чтобы контент не "прыгал" */
+    margin: 0; 
+    overflow: hidden;
   }
   
   .container {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Центрируем контент по вертикали */
-    align-items: center; /* Центрируем контент по горизонтали */
+    justify-content: center; 
+    align-items: center; 
     min-height: 100vh; 
-    width: 100vw; /* Занимаем всю ширину экрана */
+    width: 100vw; 
   }
   
   #myCanvas {
     position: absolute;
     width: 100%; 
     height: auto;
-    max-width: 800px; /* Ограничиваем максимальную ширину канваса */
-    max-height: 800px; /* Ограничиваем максимальную высоту канваса */
+    max-width: 800px;
+    max-height: 800px; 
   }
 
   .btns{
